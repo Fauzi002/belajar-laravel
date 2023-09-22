@@ -2,11 +2,29 @@
 @section('content')
     <h1>Ini Halaman Student</h1>
     <h3>Student List</h3>
-    <ol>
-        @foreach ($studentList as $data)
-        <li>
-            {{ $data->name }} | {{ $data->gender }} | {{ $data->nis }}
-        </li>
-        @endforeach
-    </ol>
-@stop
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama</th>
+                <th>Gender</th>
+                <th>NIS</th>
+                <th>Class</th>
+                <th>class</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($studentList as $data)
+            <tr>
+                <td>{{ $loop->iteration }}</td>
+                <td>{{ $data->name }}</td>
+                <td>{{ $data->gender }}</td>
+                <td>{{ $data->nis }}</td>
+                <td>{{ $data->class_id }}</td>
+                <td>{{ $data->class['name'] }}</td>
+            </tr>
+            @endforeach
+            @stop
+        </tbody>
+    </table>
