@@ -11,7 +11,7 @@
                 <th>Gender</th>
                 <th>NIS</th>
                 <th>Class</th>
-                <th>class</th>
+                <th>Extracuriculars</th>
             </tr>
         </thead>
         <tbody>
@@ -21,10 +21,14 @@
                 <td>{{ $data->name }}</td>
                 <td>{{ $data->gender }}</td>
                 <td>{{ $data->nis }}</td>
-                <td>{{ $data->class_id }}</td>
                 <td>{{ $data->class['name'] }}</td>
+                <td>
+                    @foreach ($data->extracuriculars as $item)
+                        - {{ $item->name }} <br>
+                    @endforeach
+                </td>
             </tr>
             @endforeach
-            @stop
         </tbody>
     </table>
+    @stop

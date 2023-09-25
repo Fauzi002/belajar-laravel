@@ -14,4 +14,8 @@ class student extends Model
         return $this->belongsTo(ClassRoom::class);
     }
 
+    public function extracuriculars()
+    {
+        return $this->belongsToMany(Extracuricular::class, 'student_extracuricular', 'student_id', 'extracuricular_id');
+    }
 }
