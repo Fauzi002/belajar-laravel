@@ -10,7 +10,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $student = student::with(['class', 'extracuriculars'])->get();
+        $student = student::with(['class.homeroomTeacher', 'extracuriculars'])->get();
         return view('student',[
             'title' => 'students',
             'studentList' => $student,

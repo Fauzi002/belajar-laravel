@@ -29,6 +29,9 @@
               <li class="nav-item">
                 <a class="nav-link active" href="/extracuricular">Extracuricular</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="/teacher">Teacher</a>
+              </li>
             </ul>
           </div>
         </div>

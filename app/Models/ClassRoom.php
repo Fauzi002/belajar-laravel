@@ -15,4 +15,9 @@ class ClassRoom extends Model
     {
         return $this->hasMany(student::class, 'class_id', 'id');
     }
+
+    public function homeroomTeacher()
+    {
+        return $this->belongsTo(Teacher::class, 'teacher_id', 'id');
+    }
 }
