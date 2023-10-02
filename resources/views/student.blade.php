@@ -10,9 +10,7 @@
                 <th>Nama</th>
                 <th>Gender</th>
                 <th>NIS</th>
-                <th>Class</th>
-                <th>Extracuriculars</th>
-                <th>Homeroom Teacher</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -22,13 +20,7 @@
                 <td>{{ $data->name }}</td>
                 <td>{{ $data->gender }}</td>
                 <td>{{ $data->nis }}</td>
-                <td>{{ $data->class['name'] }}</td>
-                <td>
-                    @foreach ($data->extracuriculars as $item)
-                        - {{ $item->name }} <br>
-                    @endforeach
-                </td>
-                <td>{{ $data->class->homeroomTeacher->name }}</td>
+                <td><a href="student/{{ $data->id }}">detail</a></td>
             </tr>
             @endforeach
         </tbody>

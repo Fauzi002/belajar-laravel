@@ -28,6 +28,13 @@ Route::get('/', function () {
 });
 
 Route::get('/students', [StudentController::class, 'index']);
+Route::get('/student/{id}', [StudentController::class, 'show']);
+
 Route::get('/class', [ClassController::class, 'index']);
+Route::get('/class/{id}', [ClassController::class, 'show']);
+
 Route::get('/extracuricular', [ExtracuricularController::class, 'index']);
+Route::get('/extracuricular/{id}', [ExtracuricularController::class, 'show']);
+
 Route::get('/teacher', [TeacherController::class, 'index']);
+Route::get('/teacher/{id}', [TeacherController::class, 'show']);

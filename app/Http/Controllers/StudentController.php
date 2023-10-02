@@ -10,7 +10,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $student = student::with(['class.homeroomTeacher', 'extracuriculars'])->get();
+        $student = student::get();
         return view('student',[
             'title' => 'students',
             'studentList' => $student,
@@ -30,5 +30,15 @@ class StudentController extends Controller
         // })->all();
 
         // dd($aaa);
+    }
+
+    public function show($id)
+    {
+        $student = Student::with(['class.homeroomTeacher', 'extracuriculars'])
+            ->findOrFail($id);
+        return view('student-detail',[
+            'title' => 'Student Detail',
+            'student' => $student,
+        ]);
     }
 }

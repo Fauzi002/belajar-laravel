@@ -17,7 +17,7 @@ class ClassController extends Controller
         //SELECT * FROM student WHERE class = 11 RPL C
 
         //eager Load
-        $class = ClassRoom::with('students', 'homeroomTeacher')->get(); //cara request data
+        $class = ClassRoom::get(); //cara request data
         //SELECT * FROM table class
         //SELECT * FROM stuedent WHERE class in (11 RPL A, 11 RPL B, 11 RPL C)
         return view('classroom',[
@@ -25,4 +25,15 @@ class ClassController extends Controller
             'classList' => $class,
         ]);
     }
+
+    public function show($id)
+    {
+        $class = Classroom::with(['students', 'homeroomTeacher'])
+                ->findOrFail($id);
+        return view('classroom-detail',[
+            'title' => 'Class Detail',
+            'class' => $class,
+        ]);
+    }
+
 }

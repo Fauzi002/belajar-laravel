@@ -15,4 +15,14 @@ class TeacherController extends Controller
             'teacherList' => $teacher,
         ]);
     }
+
+    public function show ($id)
+    {
+        $teacher = teacher::with('class.students')
+            ->findOrFail($id);
+        return view('teacher-detail',[
+            'title' => 'Teacher Detail',
+            'teacher' => $teacher,
+        ]);
+    }
 }
