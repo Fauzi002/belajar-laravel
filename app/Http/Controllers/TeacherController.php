@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class TeacherController extends Controller
 {
@@ -24,5 +25,20 @@ class TeacherController extends Controller
             'title' => 'Teacher Detail',
             'teacher' => $teacher,
         ]);
+    }
+
+    public function create()
+    {
+        $teacher = Teacher::all();
+        return view('teacher-add',[
+            'title' => 'Teacher - Add',
+            'teacher' => $teacher,
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $teacher = Teacher::create($request->all());
+        return redirect('/teacher');
     }
 }

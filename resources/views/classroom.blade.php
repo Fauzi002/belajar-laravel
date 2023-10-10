@@ -1,6 +1,11 @@
 @extends('template.main')
 @section('content')
     <h1>Ini Halaman Class</h1>
+
+    <div class="my-5">
+        <a href="class-add" class="btn btn-primary">Add data</a>
+    </div>
+
     <h3>Class List</h3>
 
     <table class="table">
@@ -16,7 +21,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $data->name }}</td>
-                <td><a href="class/{{ $data->id }}">detail</a></td>
+                <td><a href="class/{{ $data->id }}" class="btn btn-warning">detail</a></td>
             </tr>
             @endforeach
         </tbody>

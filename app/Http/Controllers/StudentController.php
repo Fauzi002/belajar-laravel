@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\student;
+use App\Models\ClassRoom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -40,5 +41,27 @@ class StudentController extends Controller
             'title' => 'Student Detail',
             'student' => $student,
         ]);
+    }
+
+    public function create()
+    {
+        $class = ClassRoom::select('id', 'name')->get();
+        return view('student-add',[
+            'title' => 'students - Add',
+            'class' => $class,
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        // $student = new student;
+        // $student->name = $request->name;
+        // $student->gender = $request->gender;
+        // $student->nis = $request->nis;
+        // $student->class_id = $request->class_id;
+        // $student->save();
+
+        $student = student::create($request->all());
+        return redirect('/students');
     }
 }

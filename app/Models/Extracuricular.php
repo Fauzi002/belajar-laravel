@@ -9,6 +9,10 @@ class Extracuricular extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name'
+    ];
+
     public function students()
     {
         return $this->belongsToMany(Student::class, 'student_extracuricular', 'extracuricular_id', 'student_id');

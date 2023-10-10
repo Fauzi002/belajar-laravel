@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\Teacher;
 use App\Models\ClassRoom;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 class ClassController extends Controller
 {
@@ -34,6 +36,21 @@ class ClassController extends Controller
             'title' => 'Class Detail',
             'class' => $class,
         ]);
+    }
+
+    public function create()
+    {
+        $teacher = Teacher::select('id', 'name')->get();
+        return view('classroom-add',[
+            'title' => 'Class - Add',
+            'teacher' => $teacher,
+        ]);
+    }
+
+    public function store(Request $request)
+    {
+        $class = ClassRoom::create($request->all());
+        return redirect('/class');
     }
 
 }

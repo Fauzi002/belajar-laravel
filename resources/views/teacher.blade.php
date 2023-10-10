@@ -2,6 +2,11 @@
 @section('content')
 
     <h1>Ini Halaman Teacher</h1>
+
+    <div class="my-5">
+        <a href="teacher-add" class="btn btn-primary">Add data</a>
+    </div>
+
     <h3>Teacher List</h3>
 
 
@@ -18,7 +23,7 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->name }}</td>
-                <td><a href="teacher/{{ $item->id }}">detail</a></td>
+                <td><a href="teacher/{{ $item->id }}" class="btn btn-warning">detail</a></td>
             </tr>
             @endforeach
         </tbody>
