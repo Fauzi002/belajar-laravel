@@ -25,8 +25,10 @@
                 <td>{{ $data->name }}</td>
                 <td>{{ $data->gender }}</td>
                 <td>{{ $data->nis }}</td>
-                <td><a href="student/{{ $data->id }}" class="btn btn-warning">detail</a></td>
-                <td><a href="" class="btn btn"></a></td>
+                <td>
+                    <a href="student/{{ $data->id }}" class="btn btn-warning">Detail</a>
+                    <a href="student-edit/{{ $data->id }}" class="btn btn-success text-black">Edit</a>
+                </td>
             </tr>
             @endforeach
         </tbody>

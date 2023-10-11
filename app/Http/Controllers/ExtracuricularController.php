@@ -11,7 +11,7 @@ class ExtracuricularController extends Controller
     public function index()
     {
         $ekskul = Extracuricular::get();
-        return view('extracuricular',[
+        return view('extracuricular.extracuricular',[
             'title' => 'Extracuricular',
             'ekskulList' => $ekskul,
         ]);
@@ -21,7 +21,7 @@ class ExtracuricularController extends Controller
     {
         $ekskul = Extracuricular::with('students')
             ->findOrFail($id);
-        return view('extracuricular-detail',[
+        return view('extracuricular.extracuricular-detail',[
             'title' => 'Extracuricular Detail',
             'ekskul' => $ekskul,
         ]);
@@ -30,7 +30,7 @@ class ExtracuricularController extends Controller
     public function create()
     {
         $student = student::select('id', 'name')->get();
-        return view('extracuricular-add',[
+        return view('extracuricular.extracuricular-add',[
             'title' => 'Class - Add',
             'student' => $student,
         ]);
@@ -39,6 +39,25 @@ class ExtracuricularController extends Controller
     public function store(Request $request)
     {
         $extracurricular = Extracuricular::create($request->all());
+        return redirect('/extracuricular');
+    }
+
+    public function edit(Request $request, $id)
+    {
+        $ekskul = Extracuricular::with('students')->findOrFail($id);
+        $student = Student::where('id', '!=', $ekskul->class_id)->get(['id', 'name']);
+        return view('extracuricular.extracuricular-edit', [
+            'title' => 'Extracuriculars - Edit',
+            'ekskul' => $ekskul,
+            'student' => $student
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $ekskul = Extracuricular::findOrFail($id);
+
+        $ekskul->update($request->all());
         return redirect('/extracuricular');
     }
 }

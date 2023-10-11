@@ -22,7 +22,10 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $data['name'] }}</td>
-                <td><a href="extracuricular/{{$data->id}}" class="btn btn-warning">detail</a></td>
+                <td>
+                    <a href="extracuricular/{{$data->id}}" class="btn btn-warning">Detail</a>
+                    <a href="extracuricular-edit/{{$data->id}}" class="btn btn-success text-black">Edit</a>
+                </td>
             </tr>
             @endforeach
         </tbody>

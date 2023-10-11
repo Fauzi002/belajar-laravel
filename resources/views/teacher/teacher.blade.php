@@ -23,7 +23,10 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $item->name }}</td>
-                <td><a href="teacher/{{ $item->id }}" class="btn btn-warning">detail</a></td>
+                <td>
+                    <a href="teacher/{{ $item->id }}" class="btn btn-warning">Detail</a>
+                    <a href="teacher-edit/{{ $item->id }}" class="btn btn-success text-black">Edit</a>
+                </td>
             </tr>
             @endforeach
         </tbody>

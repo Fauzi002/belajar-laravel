@@ -21,7 +21,10 @@
             <tr>
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $data->name }}</td>
-                <td><a href="class/{{ $data->id }}" class="btn btn-warning">detail</a></td>
+                <td>
+                    <a href="class/{{ $data->id }}" class="btn btn-warning">Detail</a>
+                    <a href="class-edit/{{ $data->id }}" class="btn btn-success text-black">Edit</a>
+                </td>
             </tr>
             @endforeach
         </tbody>
