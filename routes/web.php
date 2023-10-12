@@ -34,6 +34,8 @@ Route::get('/student-add', [StudentController::class, 'create']);
 Route::post('/student', [StudentController::class, 'store']);
 Route::get('/student-edit/{id}', [StudentController::class, 'edit']);
 Route::put('/student/{id}', [StudentController::class, 'update']);
+Route::get('/student-delete/{id}', [StudentController::class, 'delete']);
+Route::delete('/student-destroy/{id}', [StudentController::class, 'destroy']);
 
 Route::get('/class', [ClassController::class, 'index']);
 Route::get('/class/{id}', [ClassController::class, 'show']);
@@ -41,6 +43,8 @@ Route::get('/class-add', [ClassController::class, 'create']);
 Route::post('/class-save', [ClassController::class, 'store']);
 Route::get('/class-edit/{id}', [ClassController::class, 'edit']);
 Route::put('/class/{id}', [ClassController::class, 'update']);
+Route::get('/class-delete/{id}', [ClassController::class, 'delete']);
+Route::delete('/class-destroy/{id}', [ClassController::class, 'destroy']);
 
 Route::get('/extracuricular', [ExtracuricularController::class, 'index']);
 Route::get('/extracuricular/{id}', [ExtracuricularController::class, 'show']);
@@ -48,6 +52,8 @@ Route::get('/extracuricular-add', [ExtracuricularController::class, 'create']);
 Route::post('/extracuriculars', [ExtracuricularController::class, 'store']);
 Route::get('/extracuricular-edit/{id}', [ExtracuricularController::class, 'edit']);
 Route::put('/extracuricular/{id}', [ExtracuricularController::class, 'update']);
+Route::get('/extracuricular-delete/{id}', [ExtracuricularController::class, 'delete']);
+Route::delete('/extracuricular-destroy/{id}', [ExtracuricularController::class, 'destroy']);
 
 Route::get('/teacher', [TeacherController::class, 'index']);
 Route::get('/teacher/{id}', [TeacherController::class, 'show']);
@@ -55,3 +61,5 @@ Route::get('/teacher-add', [TeacherController::class, 'create']);
 Route::post('/teachers', [TeacherController::class, 'store']);
 Route::get('/teacher-edit/{id}', [TeacherController::class, 'edit']);
 Route::put('/teacher/{id}', [TeacherController::class, 'update']);
+Route::get('/teacher-delete/{id}', [TeacherController::class, 'delete']);
+Route::delete('/teacher-destroy/{id}', [TeacherController::class, 'destroy']);

@@ -6,6 +6,12 @@
         <a href="class-add" class="btn btn-primary">Add data</a>
     </div>
 
+    @if (Session::has('status'))
+        <div class="alert alert-success" role="alert">
+            {{ Session::get('message') }}
+        </div>
+    @endif
+
     <h3>Class List</h3>
 
     <table class="table">
@@ -24,6 +30,7 @@
                 <td>
                     <a href="class/{{ $data->id }}" class="btn btn-warning">Detail</a>
                     <a href="class-edit/{{ $data->id }}" class="btn btn-success text-black">Edit</a>
+                    <a href="class-delete/{{ $data->id }}" class="btn btn-danger text-black">Delete</a>
                 </td>
             </tr>
             @endforeach

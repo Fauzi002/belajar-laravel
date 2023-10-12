@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentCreateRequest;
+use App\Http\Requests\StudentEditRequest;
 use App\Models\student;
 use App\Models\ClassRoom;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -52,7 +55,7 @@ class StudentController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StudentCreateRequest $request)
     {
         // $student = new student;
         // $student->name = $request->name;
@@ -62,6 +65,12 @@ class StudentController extends Controller
         // $student->save();
 
         $student = student::create($request->all());
+
+        if ($student) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'add new student success!');
+        }
+
         return redirect('/students');
     }
 
@@ -76,11 +85,39 @@ class StudentController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(StudentEditRequest $request, $id)
+    {
+        $updateStudent = Student::findOrFail($id);
+
+        $updateStudent->update($request->all());
+
+        if ($updateStudent) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'update student success!');
+        }
+
+        return redirect('/students');
+    }
+
+    public function delete($id)
     {
         $student = Student::findOrFail($id);
+        return view('student.student-delete', [
+            'title' => 'students - Delete',
+            'student' => $student
+        ]);
+    }
 
-        $student->update($request->all());
+    public function destroy($id)
+    {
+        $deletedStudent = Student::findOrFail($id);
+        $deletedStudent->delete();
+
+        if ($deletedStudent) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'delete student success!');
+        }
+
         return redirect('/students');
     }
 }

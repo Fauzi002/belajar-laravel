@@ -1,10 +1,6 @@
 @extends('template.main')
 @section('content')
 
-    {{ $ekskul->students }}
-    <br> <br>
-    {{ $student }}
-
     <div class="mt-5 col-8 m-auto">
         <form action="/extracuricular/{{ $ekskul->id }}" method="POST">
             @csrf

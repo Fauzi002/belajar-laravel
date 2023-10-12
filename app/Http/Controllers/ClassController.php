@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ClassCreateRequest;
+use App\Http\Requests\ClassEditRequest;
 use App\Models\Teacher;
 use App\Models\ClassRoom;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redis;
 
 class ClassController extends Controller
@@ -47,9 +50,15 @@ class ClassController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(ClassCreateRequest $request)
     {
         $class = ClassRoom::create($request->all());
+
+        if ($class) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'add new class success!');
+        }
+
         return redirect('/class');
     }
 
@@ -64,11 +73,39 @@ class ClassController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(ClassEditRequest $request, $id)
+    {
+        $updateClass = ClassRoom::findOrFail($id);
+        $updateClass->update($request->all());
+
+        if ($updateClass) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'update class success!');
+        }
+
+        return redirect('/class');
+    }
+
+    public function delete($id)
     {
         $class = ClassRoom::findOrFail($id);
 
-        $class->update($request->all());
+        return view('classroom.classroom-delete', [
+            'title' => 'class - Delete',
+            'class' => $class,
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $deletedClass = ClassRoom::findOrFail($id);
+        $deletedClass->delete();
+
+        if ($deletedClass) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'delete class success!');
+        }
+
         return redirect('/class');
     }
 }

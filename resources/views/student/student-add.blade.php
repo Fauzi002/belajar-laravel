@@ -1,6 +1,17 @@
 @extends('template.main')
 @section('content')
     <div class="mt-5 col-8 m-auto">
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
         <form action="student" method="post">
             @csrf
             <div class="mb-3">

@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ExtracurricularCreateRequest;
+use App\Http\Requests\ExtracurricularEditRequest;
 use App\Models\student;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Models\Extracuricular;
 
 class ExtracuricularController extends Controller
@@ -36,9 +39,15 @@ class ExtracuricularController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(ExtracurricularCreateRequest $request)
     {
         $extracurricular = Extracuricular::create($request->all());
+
+        if ($extracurricular) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'add new extracurricular success!');
+        }
+
         return redirect('/extracuricular');
     }
 
@@ -53,11 +62,39 @@ class ExtracuricularController extends Controller
         ]);
     }
 
-    public function update(Request $request, $id)
+    public function update(ExtracurricularEditRequest $request, $id)
+    {
+        $updateEkskul = Extracuricular::findOrFail($id);
+        $updateEkskul->update($request->all());
+
+        if ($updateEkskul) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'update extracurricular success!');
+        }
+
+        return redirect('/extracuricular');
+    }
+
+    public function delete($id)
     {
         $ekskul = Extracuricular::findOrFail($id);
 
-        $ekskul->update($request->all());
+        return view('extracuricular.extracuricular-delete', [
+            'title' => 'Extracuriculars - Delete',
+            'ekskul' => $ekskul,
+        ]);
+    }
+
+    public function destroy($id)
+    {
+        $deletedEkskul = Extracuricular::findOrFail($id);
+        $deletedEkskul->delete();
+
+        if ($deletedEkskul) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'delete extracurricular success!');
+        }
+
         return redirect('/extracuricular');
     }
 }
