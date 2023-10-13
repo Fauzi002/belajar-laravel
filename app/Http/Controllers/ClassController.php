@@ -108,4 +108,28 @@ class ClassController extends Controller
 
         return redirect('/class');
     }
+
+    public function deletedClass()
+    {
+        $deletedClass = ClassRoom::onlyTrashed()->get();
+
+        return view('classroom.classroom-deleted-list', [
+            'title' => 'class-Deleted-List',
+            'class' => $deletedClass,
+        ]);
+
+
+    }
+
+    public function restore($id)
+    {
+        $deletedClass = ClassRoom::withTrashed()->where('id', $id)->restore();
+
+        if ($deletedClass) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'restore class success!');
+        }
+
+        return redirect('/class');
+    }
 }

@@ -52,7 +52,7 @@ class TeacherController extends Controller
         return redirect('/teacher');
     }
 
-    public function edit(Request $request, $id)
+    public function edit($id)
     {
         $teacher = Teacher::with('class.students')->findOrFail($id);
         return view('teacher.teacher-edit', [
@@ -93,6 +93,28 @@ class TeacherController extends Controller
         if ($deletedTeacher) {
             Session::flash('status', 'success');
             Session::flash('message', 'delete teacher success!');
+        }
+
+        return redirect('/teacher');
+    }
+
+    public function deletedTeacher()
+    {
+        $deletedTeacher = Teacher::onlyTrashed()->get();
+        return view('teacher.teacher-deleted-list',[
+            'title' => 'Teacher-Deleted-List',
+            'teacher' => $deletedTeacher,
+        ]);
+
+    }
+
+    public function restore($id)
+    {
+        $deletedTeacher = Teacher::withTrashed()->where('id', $id)->restore();
+
+        if ($deletedTeacher) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'restore teacher success!');
         }
 
         return redirect('/teacher');

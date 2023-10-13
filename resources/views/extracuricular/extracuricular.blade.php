@@ -5,6 +5,7 @@
 
     <div class="my-5">
         <a href="extracuricular-add" class="btn btn-primary">Add Data</a>
+        <a href="/extracuricular-deleted" class="btn btn-secondary">Show Deleted Data</a>
     </div>
 
     @if (Session::has('status'))

@@ -97,4 +97,26 @@ class ExtracuricularController extends Controller
 
         return redirect('/extracuricular');
     }
+
+    public function deletedExtracuricular()
+    {
+        $deletedEkskul = Extracuricular::onlyTrashed()->get();
+        return view('extracuricular.extracuricular-deleted-list', [
+            'title' => 'Extracuricular-Deleted-List',
+            'ekskul' => $deletedEkskul
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $deletedEkskul = Extracuricular::withTrashed()->where('id', $id)->restore();
+
+        if ($deletedEkskul) {
+            Session::flash('status', 'success');
+            Session::flash('message', 'restore extracurricular success!');
+        }
+
+        return redirect('/extracuricular');
+    }
+
 }

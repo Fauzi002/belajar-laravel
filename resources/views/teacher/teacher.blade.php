@@ -5,6 +5,7 @@
 
     <div class="my-5">
         <a href="teacher-add" class="btn btn-primary">Add Data</a>
+        <a href="teacher-deleted" class="btn btn-secondary">Show Deleted Data</a>
     </div>
 
     @if (Session::has('status'))
