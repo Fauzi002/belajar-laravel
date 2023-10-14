@@ -13,7 +13,7 @@
         </div>
     @endif
 
-        <form action="/student/{{ $student->id }}" method="post">
+        <form action="/student/{{ $student->id }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-3">
