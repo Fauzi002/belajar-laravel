@@ -11,9 +11,12 @@ use App\Models\Extracuricular;
 
 class ExtracuricularController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $ekskul = Extracuricular::get();
+        $keyword = $request->keyword;
+
+        $ekskul = Extracuricular::where('name', 'LIKE', '%' . $keyword . '%')
+                            ->paginate(10);
         return view('extracuricular.extracuricular',[
             'title' => 'Extracuricular',
             'ekskulList' => $ekskul,

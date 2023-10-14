@@ -12,9 +12,12 @@ use Illuminate\Support\Facades\Redis;
 
 class TeacherController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $teacher = Teacher::all();
+        $keyword = $request->keyword;
+
+        $teacher = Teacher::where('name', 'LIKE', '%' . $keyword . '%')
+                        ->paginate(10);
         return view('teacher.teacher',[
             'title' => 'teacher',
             'teacherList' => $teacher,

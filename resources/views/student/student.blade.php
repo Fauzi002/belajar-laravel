@@ -15,6 +15,15 @@
 
     <h3>Student List</h3>
 
+    <div class="my-3 col-12 col-sm-8 col-md-5">
+        <form action="" method="GET">
+            <div class="input-group flex-nowrap">
+                <input type="text" class="form-control" placeholder="Keyword" name="keyword" aria-label="Username" aria-describedby="addon-wrapping">
+                <button class="input-group-text btn btn-primary" id="addon-wrapping">SEARCH</button>
+              </div>
+        </form>
+    </div>
+
     <table class="table">
         <thead>
             <tr>
@@ -22,6 +31,7 @@
                 <th>Nama</th>
                 <th>Gender</th>
                 <th>NIS</th>
+                <th>Class</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -32,6 +42,7 @@
                 <td>{{ $data->name }}</td>
                 <td>{{ $data->gender }}</td>
                 <td>{{ $data->nis }}</td>
+                <td>{{ $data->class->name }}</td>
                 <td>
                     <a href="student/{{ $data->id }}" class="btn btn-warning">Detail</a>
                     <a href="student-edit/{{ $data->id }}" class="btn btn-success text-black">Edit</a>
@@ -43,7 +54,7 @@
     </table>
 
     <div class="my-5">
-        {{ $studentList->links() }}
+        {{ $studentList->withQueryString()->links() }}
     </div>
 
     @stop

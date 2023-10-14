@@ -12,9 +12,18 @@ use Illuminate\Support\Facades\DB;
 
 class StudentController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $student = student::Paginate(10);
+        $keyword = $request->keyword;
+
+        $student = student::with('class')
+                        ->where('name', 'LIKE', '%' . $keyword . '%')
+                        ->orWhere('gender', $keyword)
+                        ->orWhere('nis', 'LIKE', '%' . $keyword . '%')
+                        ->orWhereHas('class', function($query) use($keyword) {
+                            $query->where('name', 'LIKE', '%' . $keyword . '%');
+                        })
+                        ->Paginate(10);
         return view('student.student',[
             'title' => 'students',
             'studentList' => $student,

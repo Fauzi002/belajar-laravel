@@ -16,6 +16,14 @@
 
     <h3>Teacher List</h3>
 
+    <div class="my-3 col-12 col-sm-8 col-md-5">
+        <form action="" method="GET">
+            <div class="input-group flex-nowrap">
+                <input type="text" class="form-control" placeholder="Keyword" name="keyword" aria-label="Username" aria-describedby="addon-wrapping">
+                <button class="input-group-text btn btn-primary" id="addon-wrapping">SEARCH</button>
+              </div>
+        </form>
+    </div>
 
     <table class="table">
         <thead>
@@ -39,4 +47,7 @@
             @endforeach
         </tbody>
     </table>
+
+    {{ $teacherList->withQueryString()->links() }}
+
 @stop

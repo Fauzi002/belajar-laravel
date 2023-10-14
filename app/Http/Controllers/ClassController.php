@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Redis;
 
 class ClassController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         //lazy load
         // $class = ClassRoom::all(); //cara request data => ketika dibutuhkan ambil data
@@ -22,7 +22,10 @@ class ClassController extends Controller
         //SELECT * FROM student WHERE class = 11 RPL C
 
         //eager Load
-        $class = ClassRoom::get(); //cara request data
+        $keyword = $request->keyword;
+
+        $class = ClassRoom::where('name', 'LIKE', '%' . $keyword . '%')
+                        ->paginate(10); //cara request data
         //SELECT * FROM table class
         //SELECT * FROM stuedent WHERE class in (11 RPL A, 11 RPL B, 11 RPL C)
         return view('classroom.classroom',[
