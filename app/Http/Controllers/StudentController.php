@@ -73,6 +73,15 @@ class StudentController extends Controller
         // $student->class_id = $request->class_id;
         // $student->save();
 
+        $newname = '';
+
+        if($request->file('photo')){
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            $newname = $request->name . '-' . now()->timestamp . '.' . $extension;
+            $request->file('photo')->storeAs('photo', $newname);
+        }
+
+        $request['image'] = $newname;
         $student = student::create($request->all());
 
         if ($student) {
@@ -97,6 +106,16 @@ class StudentController extends Controller
     public function update(StudentEditRequest $request, $id)
     {
         $updateStudent = Student::findOrFail($id);
+
+        $newname = '';
+
+        if($request->file('photo')){
+            $extension = $request->file('photo')->getClientOriginalExtension();
+            $newname = $request->name . '-' . now()->timestamp . '.' . $extension;
+            $request->file('photo')->storeAs('photo', $newname);
+        }
+
+        $request['image'] = $newname;
 
         $updateStudent->update($request->all());
 

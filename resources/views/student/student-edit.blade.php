@@ -49,6 +49,13 @@
             </div>
 
             <div class="mb-3">
+                <label for="photo">Photo</label>
+                <div class="input-group mb-3">
+                    <input type="file" class="form-control" id="photo" name="photo" value="{{ $student->image }}">
+                  </div>
+            </div>
+
+            <div class="mb-3">
                 <button class="btn btn-success" type="submit">Update Data</button>
             </div>
         </form>
