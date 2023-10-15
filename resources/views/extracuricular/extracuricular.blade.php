@@ -30,7 +30,9 @@
             <tr>
                 <th>No.</th>
                 <th>Name</th>
+                @if (Auth::user()->role_id == 1)
                 <th>Action</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -39,9 +41,11 @@
                 <td>{{ $loop->iteration }}</td>
                 <td>{{ $data['name'] }}</td>
                 <td>
+                    @if (Auth::user()->role_id == 1)
                     <a href="extracuricular/{{$data->id}}" class="btn btn-warning">Detail</a>
                     <a href="extracuricular-edit/{{$data->id}}" class="btn btn-success text-black">Edit</a>
                     <a href="extracuricular-delete/{{ $data->id }}" class="btn btn-danger text-black">Delete</a>
+                    @endif
                 </td>
             </tr>
             @endforeach
