@@ -32,6 +32,9 @@
               <li class="nav-item">
                 <a class="nav-link active" href="/teacher">Teacher</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link activate" href="/logout">Logout</a>
+              </li>
             </ul>
           </div>
         </div>

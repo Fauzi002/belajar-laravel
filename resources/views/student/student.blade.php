@@ -32,7 +32,9 @@
                 <th>Gender</th>
                 <th>NIS</th>
                 <th>Class</th>
+                @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2)
                 <th>Action</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -44,9 +46,16 @@
                 <td>{{ $data->nis }}</td>
                 <td>{{ $data->class->name }}</td>
                 <td>
+                    @if (Auth::user()->role_id != 1 && Auth::user()->role_id != 2)
+
+                    @else
                     <a href="student/{{ $data->id }}" class="btn btn-warning">Detail</a>
                     <a href="student-edit/{{ $data->id }}" class="btn btn-success text-black">Edit</a>
+                    @endif
+
+                    @if (Auth::user()->role_id == 1)
                     <a href="student-delete/{{ $data->id }}" class="btn btn-danger text-black">Delete</a>
+                    @endif
                 </td>
             </tr>
             @endforeach
